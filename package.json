@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"new": "script() { echo Creating ./Problems/${2}.elm ; sed \"s|${1}|Problems.${2}|g\" ./Starters/${1}.elm > ./Problems/${2}.elm; }; script",
-		"make": "script() { echo Building ./Problems/${1}.elm ; elm-cli make --debug ./Problems/${1}.elm ./Solutions/${1}.js; sed -i '96d' ./Solutions/${1}.js ; }; script",
+		"make": "script() { echo Building ./Problems/${1}.elm ; elm-cli make --debug ./Problems/${1}.elm ./Solutions/${1}.js; sed -i '99d' ./Solutions/${1}.js ; }; script",
 		"compress": "script() { echo Compressing ./Problems/${1}.elm ; terser ./Solutions/${1}.js --compress 'pure_funcs=\"F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9\",pure_getters,keep_fargs=false,unsafe_comps,unsafe' --output=./Solutions/${1}.js; }; script",
 		"solution": "script() { echo ${2} | node ./Solutions/${1}.js; }; script"
 	},

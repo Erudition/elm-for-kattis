@@ -1,0 +1,68 @@
+diff --git a/bin/elm-cli b/bin/elm-cli
+index e87b5ae70ba4b08679ae481d9997468015e512f0..83f0bbe5759bf00881ecbf55e1edc485421e5fad 100755
+--- a/bin/elm-cli
++++ b/bin/elm-cli
+@@ -13,7 +13,7 @@ function createIo(rl) {
+             this.send(fs.writeSync(fd, content));
+         },
+         fread: function(fd) {
+-            this.send(fs.readFileSync(fd).toString());
++            this.send(fd == 0 ? stdInLines : fs.readFileSync(fd).toString());
+         },
+         fopen: function(filename, flags) {
+             try {
+@@ -87,13 +87,13 @@ switch (args.cmd) {
+ 
+ function start(elmApp, flags) {
+     const rl = readline.createInterface({
+-      input: process.stdin,
+-      output: process.stdout
++        input: process.stdin,
++        output: process.stdout
+     });
+     const io = createIo(rl);
+     const app = elmApp.init({ flags: flags });
+ 
+-    app.ports.send.subscribe(function(msg) {
++    app.ports.send.subscribe(function (msg) {
+         const fn = io[msg.fn];
+ 
+         if (!fn) {
+@@ -215,7 +215,7 @@ function compileProgram(args) {
+         } else {
+             childProcess.execSync(`elm make --optimize ${elmMain}.elm --output ${elmMain}.js`);
+         }
+-    } catch(e) {
++    } catch (e) {
+         fs.unlinkSync(`${elmMain}.elm`);
+         process.exit(255);
+     }
+@@ -275,6 +275,16 @@ const readline = require('readline');
+ const os = require('os');
+ const tmpDir = os.tmpdir();
+ 
++const rl = readline.createInterface({
++  input: process.stdin,
++  output: process.stdout
++});
++
++try {
++	stdInLines = fs.readFileSync(0).toString();
++} catch (e) {
++	stdInLines = '';
++}
+ 
+ ${elm}
+ 
+@@ -288,10 +298,7 @@ while (true) {
+     elmApp = elmApp[Object.keys(elmApp)[0]];
+ }
+ 
+-const rl = readline.createInterface({
+-  input: process.stdin,
+-  output: process.stdout
+-});
++
+ 
+ 
+ const io = createIo(rl);
