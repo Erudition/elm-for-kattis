@@ -128,3 +128,26 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# Elm
+# elm-package generated files
+**/elm-stuff/
+
+
+# test-related-stuff
+coverage/
+test/**/elm-package.json
+test/**/RunElmMain*
+test/**/stdout-*.txt
+test/**/stderr-*.txt
+!test/integration/case-projects/elm-package*/elm-package.json
+!test/integration/case-projects/subdirectory*/elm-package.json
+
+# solutions
+Solutions/
+
+# Problems are personal - don't publish them on Github!
+Problems/*
+!Problems/HelloWorld.elm
+test.txt
