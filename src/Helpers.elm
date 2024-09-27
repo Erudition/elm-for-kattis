@@ -27,6 +27,10 @@ intFromString integerString =
         Nothing ->
             Debug.todo ("String '" ++ integerString ++ "' could not be forced to an Int")
 
+spaceSeparatedIntsFromString : String -> List Int
+spaceSeparatedIntsFromString intsString =
+    List.map intFromString (String.split intsString)
+
 floatFromString : String -> Float
 floatFromString floatString =
     case String.toFloat floatString of
@@ -35,3 +39,7 @@ floatFromString floatString =
         
         Nothing ->
             Debug.todo ("String '" ++ floatString ++ "' could not be forced to a Float")
+
+spaceSeparatedFloatsFromString : String -> List Float
+spaceSeparatedFloatsFromString floatsString =
+    List.map floatFromString (String.split floatsString)
