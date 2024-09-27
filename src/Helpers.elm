@@ -29,7 +29,7 @@ intFromString integerString =
 
 spaceSeparatedIntsFromString : String -> List Int
 spaceSeparatedIntsFromString intsString =
-    List.map intFromString (String.split intsString)
+    List.map intFromString (String.split " " intsString)
 
 floatFromString : String -> Float
 floatFromString floatString =
@@ -42,4 +42,4 @@ floatFromString floatString =
 
 spaceSeparatedFloatsFromString : String -> List Float
 spaceSeparatedFloatsFromString floatsString =
-    List.map floatFromString (String.split floatsString)
+    List.map floatFromString (String.split " " floatsString)

@@ -3,7 +3,6 @@ module Starter exposing (program)
 Solution for 
 -}
 
-import Run
 import Posix.IO
 import Posix.IO.Process
 import List.Extra
