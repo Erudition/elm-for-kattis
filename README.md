@@ -62,3 +62,6 @@ If there are no build errors, you'll see a new file in `Solutions/` with the `.s
 pnpm run solution HippHipp "optional stdin input here"
 ```
 Directly runs `Solutions/HippHipp.solution` with node. The second argument will be passed to stdin.
+
+# Patch for `elm-posix`
+This package contains a `pnpm patch` for the script builder that make sure `stdin` is processed before elm does. Otherwise, your script will work fine locally when piping input from, say, a file, but fail on Kattis as if it got no input. Kattis [streams the lines in a weird way](https://stackoverflow.com/a/69559880) which makes the otherwise-fine stdin capture of `elm-posix` see nothing, since the input has already passed by before elm asks for it. Also, if there's no stdin, asking for it will crash node, so the patch contains a fix for that so we don't have to make you specify whether every problem has input.
