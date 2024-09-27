@@ -150,4 +150,3 @@ Solutions/
 # Problems are personal - don't publish them on Github!
 Problems/*
 !Problems/HelloWorld.elm
-test.txt

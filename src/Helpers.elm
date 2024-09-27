@@ -7,6 +7,17 @@ import Posix.IO.File as File
 import Json.Decode as Decode
 import Array exposing (Array)
 
+
+type alias Solver = List String -> List String
+
+{-| Read String input lines as a List String, give the same as output. Pass your `solve` function.
+-}
+linesInLinesOut : Process -> Solver -> IO ()
+linesInLinesOut process solve =
+    IO.do (File.read File.stdIn) <| \content ->
+    IO.do (Proc.print (String.join "\n" (solve (String.lines (String.trim content))))) <| \_ ->
+    IO.return ()
+
 intFromString : String -> Int
 intFromString integerString =
     case String.toInt integerString of

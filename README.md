@@ -65,3 +65,8 @@ Directly runs `Solutions/HippHipp.solution` with node. The second argument will 
 
 # Patch for `elm-posix`
 This package contains a `pnpm patch` for the script builder that make sure `stdin` is processed before elm does. Otherwise, your script will work fine locally when piping input from, say, a file, but fail on Kattis as if it got no input. Kattis [streams the lines in a weird way](https://stackoverflow.com/a/69559880) which makes the otherwise-fine stdin capture of `elm-posix` see nothing, since the input has already passed by before elm asks for it. Also, if there's no stdin, asking for it will crash node, so the patch contains a fix for that so we don't have to make you specify whether every problem has input.
+
+# Run in debug mode
+Your solutions are compiled in debug mode so that we can use `Debug.todo` for ignoring the impossible values of Kattis inputs, since Kattis guarantees that the input will be in the correct format. For example, if we're getting a list of Ints, it's annoying to have to deal with all the Maybes that come from e.g. `String.toInt` in your solution. Using the functions in the `Helpers` library, you can force a String to be an Int without falling back to some arbitrary value like `0` (which can be confusing when your output is wrong) or writing decoders (which are for untrusted input). Instead, your program will crash upfront if the input is not as expected, and work fine if it was.
+
+The `make` script automatically removes the line that spits out the warning about compiling in debug mode, so as not to contaminate your answer.
