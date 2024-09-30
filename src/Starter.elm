@@ -3,15 +3,12 @@ module Starter exposing (program)
 Solution for 
 -}
 
-import Posix.IO
-import Posix.IO.Process
 import List.Extra
 import Helpers exposing (..)
 
 
 {-| This is the entry point, it will decode the inputs, run your `solve` function and print the output. Don't touch it.
 -}
-program : Posix.IO.Process -> Posix.IO.IO ()
 program process =
     linesInLinesOut process solve
 
